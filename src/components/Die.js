@@ -19,7 +19,7 @@ class Die extends React.Component {
         }
     }
 
-    setStatus(status) {
+    setStatus = (status) => {
         this.props.changeDieStatus(this.props.id, status);
     }
 
@@ -49,4 +49,4 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
-export default connect(mapStateToProps, { rollDie, changeDieStatus })(Die);
+export default connect(mapStateToProps, { rollDie, changeDieStatus }, null, {forwardRef: true} )(Die);
