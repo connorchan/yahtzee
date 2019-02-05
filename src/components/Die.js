@@ -31,9 +31,9 @@ class Die extends React.Component {
     render() {
         return (
             <div className="die-wrap">
-                <div className="die">{this.props.value}</div>
+                <div className={`die die-${this.props.value}`}>{this.props.value}</div>
                 <div className="die-controls">
-                    <button className={'die-status ' + this.props.status}
+                    <button className={`die-status ${this.props.status}`}
                             onClick={this.toggleStatus}>{this.statusMessages[this.props.status]}
                     </button>
                 </div>
