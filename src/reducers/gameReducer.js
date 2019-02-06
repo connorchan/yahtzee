@@ -64,16 +64,16 @@ const getDiceCount = (dice) => {
         }
     }
     return counts;
-}
+};
 
-const updateDie = (array, action, property) => {
-    return array.map((die, index) => {
+const updateDie = (dice, action, property) => {
+    return dice.map((die, index) => {
         if (index !== action.payload.id) {
             return die;
         }
         return { ...die, [property]: action.payload[property] };
     })
-}
+};
 
 const scoreUpperSection = (value, dice) => {
     let numDice = dice.filter((die) => {
@@ -81,7 +81,7 @@ const scoreUpperSection = (value, dice) => {
     }).length;
 
     return numDice * value;
-}
+};
 
 const scoreLowerSection = (diceCounts, section) => {
     switch(section) {
@@ -102,7 +102,7 @@ const scoreLowerSection = (diceCounts, section) => {
         default:
             return;
     }
-}
+};
 
 const ofAKind = (diceCounts, whichOfAKind) => {
     var score = 0;
@@ -116,7 +116,7 @@ const ofAKind = (diceCounts, whichOfAKind) => {
         }
     }
     return isValid ? score : 0;
-}
+};
 
 const fullHouse = (diceCounts) => {
     let twoOfAKind = false;
@@ -136,7 +136,7 @@ const fullHouse = (diceCounts) => {
     } else {
         return 0;
     }
-}
+};
 
 const smallStraight = (diceCounts) => {
     var ssOne = (diceCounts[1] && diceCounts[2] && diceCounts[3] && diceCounts[4]);
@@ -148,7 +148,7 @@ const smallStraight = (diceCounts) => {
     } else {
         return 0;
     }
-}
+};
 
 const largeStraight = (diceCounts) => {
     var lsOne = (diceCounts[1] && diceCounts[2] && diceCounts[3] && diceCounts[4] && diceCounts[5]);
@@ -159,7 +159,7 @@ const largeStraight = (diceCounts) => {
     } else {
          return 0;
     }
-}
+};
 
 const yahtzee = (diceCounts) => {
     for (let i = 1; i < 7; i++) {
@@ -169,7 +169,7 @@ const yahtzee = (diceCounts) => {
             return 0;
         }
     }
-}
+};
 
 const chance = (diceCounts) => {
     let score = 0;
@@ -179,11 +179,25 @@ const chance = (diceCounts) => {
         }
     }
     return score;
-}
+};
+
+const updateScoreCard = (state, section, score) => {
+    return {...state, scoreCard: {
+                ...state.scoreCard,
+                [section]: {
+                    ...state.scoreCard[section],
+                    completed: true,
+                    score
+                }
+            }
+        };
+};
 
 export default (state = INITIAL_STATE, action) => {
     let section;
     let score;
+    let numRolls;
+    let diceCounts;
 
     switch (action.type) {
         case ROLL_DIE:
@@ -191,35 +205,19 @@ export default (state = INITIAL_STATE, action) => {
         case CHANGE_DIE_STATUS:
             return { ...state, dice: updateDie(state.dice, action, "status") };
         case ROLL_DICE:
-            let numRolls = state.numRolls <  3 ? state.numRolls += 1 : 0;
+            numRolls = state.numRolls <  3 ? state.numRolls += 1 : 0;
             return { ...state, numRolls };
         case RESET_TURN:
             return { ...state, numRolls: 0 };
         case SCORE_UPPER_SECTION:
             section = action.payload.section;
             score = scoreUpperSection(action.payload.value, state.dice);
-            return { ...state, scoreCard: {
-                        ...state.scoreCard,
-                        [section]: {
-                            ...state.scoreCard[section],
-                            completed: true,
-                            score
-                        }
-                    }
-            };
+            return updateScoreCard(state, section, score);
         case SCORE_LOWER_SECTION:
-            let diceCounts = getDiceCount();
+            diceCounts = getDiceCount();
             section = action.payload.section;
             score = scoreLowerSection(diceCounts, section);
-            return { ...state, scoreCard: {
-                        ...state.scoreCard,
-                        [section]: {
-                            ...state.scoreCard[section],
-                            completed: true,
-                            score
-                        }
-                    }
-            };
+            return updateScoreCard(state, section, score);
         default:
             return state;
     }

@@ -1,9 +1,13 @@
 import React from 'react';
 import Dice from './Dice';
+import ScoreCard from './ScoreCard';
 
 const Game = () => {
     return (
-        <Dice />
+        <React.Fragment>
+            <Dice />
+            <ScoreCard />
+        </React.Fragment>
     );
 };
 
