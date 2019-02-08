@@ -1,6 +1,84 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 import { rollDie, changeDieStatus } from '../actions'
+
+const DieWrap = styled.div`
+    display: inline-block;
+    margin: 0 5px;
+`;
+
+const DieBox = styled.div`
+    height: 75px;
+    width: 75px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    position: relative;
+
+    &.die-1 > div:nth-child(1) > div:nth-child(1),
+    &.die-1 > div:nth-child(1) > div:nth-child(2),
+    &.die-1 > div:nth-child(1) > div:nth-child(3),
+    &.die-1 > div:nth-child(2) > div:nth-child(1),
+    &.die-1 > div:nth-child(2) > div:nth-child(3),
+    &.die-1 > div:nth-child(3) > div:nth-child(1),
+    &.die-1 > div:nth-child(3) > div:nth-child(2),
+    &.die-1 > div:nth-child(3) > div:nth-child(3) {
+        visibility: hidden;
+    }
+
+    &.die-2 > div:nth-child(1) > div:nth-child(2),
+    &.die-2 > div:nth-child(1) > div:nth-child(3),
+    &.die-2 > div:nth-child(2) > div:nth-child(1),
+    &.die-2 > div:nth-child(2) > div:nth-child(2),
+    &.die-2 > div:nth-child(2) > div:nth-child(3),
+    &.die-2 > div:nth-child(3) > div:nth-child(1),
+    &.die-2 > div:nth-child(3) > div:nth-child(2) {
+        visibility: hidden;
+    }
+
+    &.die-3 > div:nth-child(1) > div:nth-child(2),
+    &.die-3 > div:nth-child(1) > div:nth-child(3),
+    &.die-3 > div:nth-child(2) > div:nth-child(1),
+    &.die-3 > div:nth-child(2) > div:nth-child(3),
+    &.die-3 > div:nth-child(3) > div:nth-child(1),
+    &.die-3 > div:nth-child(3) > div:nth-child(2) {
+        visibility: hidden;
+    }
+
+    &.die-4 > div:nth-child(1) > div:nth-child(2),
+    &.die-4 > div:nth-child(2) > div:nth-child(1),
+    &.die-4 > div:nth-child(2) > div:nth-child(2),
+    &.die-4 > div:nth-child(2) > div:nth-child(3),
+    &.die-4 > div:nth-child(3) > div:nth-child(2) {
+        visibility: hidden;
+    }
+
+    &.die-5 > div:nth-child(1) > div:nth-child(2),
+    &.die-5 > div:nth-child(2) > div:nth-child(1),
+    &.die-5 > div:nth-child(2) > div:nth-child(3),
+    &.die-5 > div:nth-child(3) > div:nth-child(2) {
+        visibility: hidden;
+    }
+
+    &.die-6 > div:nth-child(1) > div:nth-child(2),
+    &.die-6 > div:nth-child(2) > div:nth-child(2),
+    &.die-6 > div:nth-child(3) > div:nth-child(2) {
+        visibility: hidden;
+    }
+`;
+
+const DotRow = styled.div`
+    display: flex;
+    justify-content: space-between;
+    margin: 7px;
+`;
+
+const DieDot = styled.div`
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #000;
+`;
 
 class Die extends React.Component {
     statusMessages = {
@@ -30,14 +108,30 @@ class Die extends React.Component {
 
     render() {
         return (
-            <div className="die-wrap">
-                <div className={`die die-${this.props.value}`}>{this.props.value}</div>
+            <DieWrap>
+                <DieBox className={`die-${this.props.value}`}>
+                    <DotRow>
+                        <DieDot/>
+                        <DieDot/>
+                        <DieDot/>
+                    </DotRow>
+                    <DotRow>
+                        <DieDot/>
+                        <DieDot/>
+                        <DieDot/>
+                    </DotRow>
+                    <DotRow>
+                        <DieDot/>
+                        <DieDot/>
+                        <DieDot/>
+                    </DotRow>
+                </DieBox>
                 <div className="die-controls">
                     <button className={`die-status ${this.props.status}`}
                             onClick={this.toggleStatus}>{this.statusMessages[this.props.status]}
                     </button>
                 </div>
-            </div>
+            </DieWrap>
         );
     }
 }
