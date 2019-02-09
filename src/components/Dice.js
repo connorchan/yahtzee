@@ -25,7 +25,7 @@ class Dice extends React.Component {
 
     render() {
         return (
-            <div className="dice-area">
+            <section className="dice-area">
                 <div className="dice-wrap">
                     <Die id={0} ref={this.dieRef1} />
                     <Die id={1} ref={this.dieRef2} />
@@ -36,7 +36,7 @@ class Dice extends React.Component {
                 <div className="dice-controls">
                     <button onClick={this.rollDice} disabled={this.props.numRolls > 2}>Roll</button>
                 </div>
-            </div>
+            </section>
         );
     }
 }

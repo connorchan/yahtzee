@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { rollDie, changeDieStatus } from '../actions'
+import { rollDie, changeDieStatus } from '../actions';
 
 const DieWrap = styled.div`
     display: inline-block;
-    margin: 0 5px;
+    margin: 10px 5px;
 `;
 
 const DieBox = styled.div`
@@ -14,6 +14,7 @@ const DieBox = styled.div`
     border: 1px solid #000;
     border-radius: 10px;
     position: relative;
+    margin-bottom: 10px;
 
     &.die-1 > div:nth-child(1) > div:nth-child(1),
     &.die-1 > div:nth-child(1) > div:nth-child(2),
@@ -22,44 +23,34 @@ const DieBox = styled.div`
     &.die-1 > div:nth-child(2) > div:nth-child(3),
     &.die-1 > div:nth-child(3) > div:nth-child(1),
     &.die-1 > div:nth-child(3) > div:nth-child(2),
-    &.die-1 > div:nth-child(3) > div:nth-child(3) {
-        visibility: hidden;
-    }
-
+    &.die-1 > div:nth-child(3) > div:nth-child(3),
+    
     &.die-2 > div:nth-child(1) > div:nth-child(2),
     &.die-2 > div:nth-child(1) > div:nth-child(3),
     &.die-2 > div:nth-child(2) > div:nth-child(1),
     &.die-2 > div:nth-child(2) > div:nth-child(2),
     &.die-2 > div:nth-child(2) > div:nth-child(3),
     &.die-2 > div:nth-child(3) > div:nth-child(1),
-    &.die-2 > div:nth-child(3) > div:nth-child(2) {
-        visibility: hidden;
-    }
-
+    &.die-2 > div:nth-child(3) > div:nth-child(2),
+    
     &.die-3 > div:nth-child(1) > div:nth-child(2),
     &.die-3 > div:nth-child(1) > div:nth-child(3),
     &.die-3 > div:nth-child(2) > div:nth-child(1),
     &.die-3 > div:nth-child(2) > div:nth-child(3),
     &.die-3 > div:nth-child(3) > div:nth-child(1),
-    &.die-3 > div:nth-child(3) > div:nth-child(2) {
-        visibility: hidden;
-    }
-
+    &.die-3 > div:nth-child(3) > div:nth-child(2),
+    
     &.die-4 > div:nth-child(1) > div:nth-child(2),
     &.die-4 > div:nth-child(2) > div:nth-child(1),
     &.die-4 > div:nth-child(2) > div:nth-child(2),
     &.die-4 > div:nth-child(2) > div:nth-child(3),
-    &.die-4 > div:nth-child(3) > div:nth-child(2) {
-        visibility: hidden;
-    }
-
+    &.die-4 > div:nth-child(3) > div:nth-child(2),
+    
     &.die-5 > div:nth-child(1) > div:nth-child(2),
     &.die-5 > div:nth-child(2) > div:nth-child(1),
     &.die-5 > div:nth-child(2) > div:nth-child(3),
-    &.die-5 > div:nth-child(3) > div:nth-child(2) {
-        visibility: hidden;
-    }
-
+    &.die-5 > div:nth-child(3) > div:nth-child(2),
+    
     &.die-6 > div:nth-child(1) > div:nth-child(2),
     &.die-6 > div:nth-child(2) > div:nth-child(2),
     &.die-6 > div:nth-child(3) > div:nth-child(2) {
@@ -128,7 +119,8 @@ class Die extends React.Component {
                 </DieBox>
                 <div className="die-controls">
                     <button className={`die-status ${this.props.status}`}
-                            onClick={this.toggleStatus}>{this.statusMessages[this.props.status]}
+                            onClick={this.toggleStatus}
+                            disabled={this.props.numRolls === 0}>{this.statusMessages[this.props.status]}
                     </button>
                 </div>
             </DieWrap>
@@ -139,7 +131,8 @@ class Die extends React.Component {
 const mapStateToProps = (state, ownProps) => {
     return {
         value: state.game.dice[ownProps.id].value,
-        status: state.game.dice[ownProps.id].status
+        status: state.game.dice[ownProps.id].status,
+        numRolls: state.game.numRolls
     }
 }
 

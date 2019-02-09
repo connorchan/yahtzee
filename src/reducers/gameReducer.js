@@ -4,13 +4,6 @@ import { ROLL_DIE,
         RESET_TURN,
         SCORE_UPPER_SECTION,
         SCORE_LOWER_SECTION,
-        THREE_OF_A_KIND,
-        FOUR_OF_A_KIND,
-        FULL_HOUSE,
-        SMALL_STRAIGHT,
-        LARGE_STRAIGHT,
-        YAHTZEE,
-        CHANCE,
         END_GAME } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -85,19 +78,19 @@ const scoreUpperSection = (value, dice) => {
 
 const scoreLowerSection = (diceCounts, section) => {
     switch(section) {
-        case THREE_OF_A_KIND:
+        case 'threeOfAKind':
             return ofAKind(diceCounts, 3);
-        case FOUR_OF_A_KIND:
+        case 'fourOfAKind':
             return ofAKind(diceCounts, 4);
-        case FULL_HOUSE:
+        case 'fullHouse':
             return fullHouse(diceCounts);
-        case SMALL_STRAIGHT:
+        case 'smStraight':
             return smallStraight(diceCounts);
-        case LARGE_STRAIGHT:
+        case 'lgStraight':
             return largeStraight(diceCounts);
-        case YAHTZEE:
+        case 'yahtzee':
             return yahtzee(diceCounts);
-        case CHANCE:
+        case 'chance':
             return chance(diceCounts);
         default:
             return;
@@ -182,42 +175,32 @@ const chance = (diceCounts) => {
 };
 
 const updateScoreCard = (state, section, score) => {
-    return {...state, scoreCard: {
-                ...state.scoreCard,
-                [section]: {
-                    ...state.scoreCard[section],
-                    completed: true,
-                    score
-                }
+    return {
+        ...state, scoreCard: {
+            ...state.scoreCard,
+            [section]: {
+                ...state.scoreCard[section],
+                completed: true,
+                score
             }
-        };
+        }, numRolls: 0
+    };
 };
 
 export default (state = INITIAL_STATE, action) => {
-    let section;
-    let score;
-    let numRolls;
-    let diceCounts;
-
     switch (action.type) {
         case ROLL_DIE:
             return { ...state, dice: updateDie(state.dice, action, "value") };
         case CHANGE_DIE_STATUS:
             return { ...state, dice: updateDie(state.dice, action, "status") };
         case ROLL_DICE:
-            numRolls = state.numRolls <  3 ? state.numRolls += 1 : 0;
-            return { ...state, numRolls };
+            return { ...state, numRolls: state.numRolls <  3 ? state.numRolls += 1 : 0 };
         case RESET_TURN:
             return { ...state, numRolls: 0 };
         case SCORE_UPPER_SECTION:
-            section = action.payload.section;
-            score = scoreUpperSection(action.payload.value, state.dice);
-            return updateScoreCard(state, section, score);
+            return updateScoreCard(state, action.payload.section, scoreUpperSection(action.payload.value, state.dice));
         case SCORE_LOWER_SECTION:
-            diceCounts = getDiceCount();
-            section = action.payload.section;
-            score = scoreLowerSection(diceCounts, section);
-            return updateScoreCard(state, section, score);
+            return updateScoreCard(state, action.payload.section, scoreLowerSection(getDiceCount(action.payload.dice), action.payload.section));
         default:
             return state;
     }
