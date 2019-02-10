@@ -9,12 +9,14 @@ const DieWrap = styled.div`
 `;
 
 const DieBox = styled.div`
+    background: #FFF;
     height: 75px;
     width: 75px;
     border: 1px solid #000;
     border-radius: 10px;
     position: relative;
     margin-bottom: 10px;
+    padding-bottom: 15px;
 
     &.die-1 > div:nth-child(1) > div:nth-child(1),
     &.die-1 > div:nth-child(1) > div:nth-child(2),
@@ -86,10 +88,6 @@ class Die extends React.Component {
             const value = Math.floor(Math.random() * 6) + 1;
             this.props.rollDie(this.props.id, value);
         }
-    }
-
-    setStatus = (status) => {
-        this.props.changeDieStatus(this.props.id, status);
     }
 
     toggleStatus = () => {

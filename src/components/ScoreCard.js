@@ -1,128 +1,152 @@
 import React from 'react';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { scoreUpperSection, scoreLowerSection } from '../actions';
+
+const ScoreCardSection = styled.section`
+    background: #EEE;
+    padding: 15px 0;
+`;
+
+const TableData = styled.td`
+    padding: 4px;
+    border: 1px solid #000;
+    background: #FFF;
+
+    .header-row & {
+        font-weight: bold;
+    }
+
+    :nth-child(2) {
+        font-size: 12px;
+    }
+
+    :nth-child(2), :nth-child(3), .header-row & {
+        text-align: center;
+    }
+`;
 
 const ScoreCard = (props) => {
     return (
-        <div className="scorecard-wrap">
-            <table className="scorecard">
+        <ScoreCardSection>
+            <table className="scorecard" align="center" cellPadding="0">
                 <tbody>
                     <tr className="header-row">
-                        <td>UPPER SECTION</td>
-                        <td>HOW TO SCORE</td>
-                        <td>SCORE</td>
+                        <TableData>UPPER SECTION</TableData>
+                        <TableData>HOW TO SCORE</TableData>
+                        <TableData>SCORE</TableData>
                     </tr>
                     <tr className="us-row aces">
-                        <td>ACES</td>
-                        <td>Count and Add <br/> Only Aces</td>
-                        <td>{props.scoreCard.aces.completed ? props.scoreCard.aces.score : ''}</td>
+                        <TableData>ACES</TableData>
+                        <TableData>Count and Add <br/> Only Aces</TableData>
+                        <TableData>{props.scoreCard.aces.completed || props.ended ? props.scoreCard.aces.score : ''}</TableData>
                     </tr>
                     <tr className="us-row twos">
-                        <td>TWOS</td>
-                        <td>Count and Add <br/> Only Twos</td>
-                        <td>{props.scoreCard.twos.completed ? props.scoreCard.twos.score : ''}</td>
+                        <TableData>TWOS</TableData>
+                        <TableData>Count and Add <br/> Only Twos</TableData>
+                        <TableData>{props.scoreCard.twos.completed || props.ended ? props.scoreCard.twos.score : ''}</TableData>
                     </tr>
                     <tr className="us-row threes">
-                        <td>THREES</td>
-                        <td>Count and Add <br/> Only Threes</td>
-                        <td>{props.scoreCard.threes.completed ? props.scoreCard.threes.score : ''}</td>
+                        <TableData>THREES</TableData>
+                        <TableData>Count and Add <br/> Only Threes</TableData>
+                        <TableData>{props.scoreCard.threes.completed || props.ended ? props.scoreCard.threes.score : ''}</TableData>
                     </tr>
                     <tr className="us-row fours">
-                        <td>FOURS</td>
-                        <td>Count and Add <br/> Only Fours</td>
-                        <td>{props.scoreCard.fours.completed ? props.scoreCard.fours.score : ''}</td>
+                        <TableData>FOURS</TableData>
+                        <TableData>Count and Add <br/> Only Fours</TableData>
+                        <TableData>{props.scoreCard.fours.completed || props.ended ? props.scoreCard.fours.score : ''}</TableData>
                     </tr>
                     <tr className="us-row fives">
-                        <td>FIVES</td>
-                        <td>Count and Add <br/> Only Fives</td>
-                        <td>{props.scoreCard.fives.completed ? props.scoreCard.fives.score : ''}</td>
+                        <TableData>FIVES</TableData>
+                        <TableData>Count and Add <br/> Only Fives</TableData>
+                        <TableData>{props.scoreCard.fives.completed || props.ended ? props.scoreCard.fives.score : ''}</TableData>
                     </tr>
                     <tr className="us-row sixes">
-                        <td>SIXES</td>
-                        <td>Count and Add <br/> Only Sixes</td>
-                        <td>{props.scoreCard.sixes.completed ? props.scoreCard.sixes.score : ''}</td>
+                        <TableData>SIXES</TableData>
+                        <TableData>Count and Add <br/> Only Sixes</TableData>
+                        <TableData>{props.scoreCard.sixes.completed || props.ended ? props.scoreCard.sixes.score : ''}</TableData>
                     </tr>
                     <tr className="us-row upper-total-score">
-                        <td>TOTAL SCORE</td>
-                        <td></td>
-                        <td>{props.scoreCard.upperScore.completed ? props.scoreCard.upperScore.score : ''}</td>
+                        <TableData>TOTAL SCORE</TableData>
+                        <TableData></TableData>
+                        <TableData>{props.scoreCard.upperScore.completed || props.ended ? props.scoreCard.upperScore.score : ''}</TableData>
                     </tr>
                     <tr className="us-row bonus">
-                        <td>BONUS</td>
-                        <td>35pts if Total Score <br/> >= 63</td>
-                        <td>{props.scoreCard.upperBonus.completed ? props.scoreCard.upperBonus.score : ''}</td>
+                        <TableData>BONUS</TableData>
+                        <TableData>35pts if Total Score <br/> >= 63</TableData>
+                        <TableData>{props.scoreCard.upperBonus.completed || props.ended ? props.scoreCard.upperBonus.score : ''}</TableData>
                     </tr>
                     <tr className="us-row upper-total">
-                        <td>TOTAL</td>
-                        <td>Of Upper Section</td>
-                        <td>{props.scoreCard.upperTotal.completed ? props.scoreCard.upperTotal.score : ''}</td>
+                        <TableData>TOTAL</TableData>
+                        <TableData>of Upper Section</TableData>
+                        <TableData>{props.scoreCard.upperTotal.completed || props.ended ? props.scoreCard.upperTotal.score : ''}</TableData>
                     </tr>
                     <tr className="header-row">
-                        <td>LOWER SECTION</td>
-                        <td></td>
-                        <td></td>
+                        <TableData>LOWER SECTION</TableData>
+                        <TableData></TableData>
+                        <TableData></TableData>
                     </tr>
-                    <tr className="us-row three-of-a-kind">
-                        <td>3 OF A KIND</td>
-                        <td>Add Total of All Dice</td>
-                        <td>{props.scoreCard.threeOfAKind.completed ? props.scoreCard.threeOfAKind.score : ''}</td>
+                    <tr className="ls-row three-of-a-kind">
+                        <TableData>3 OF A KIND</TableData>
+                        <TableData>Add Total of All Dice</TableData>
+                        <TableData>{props.scoreCard.threeOfAKind.completed || props.ended ? props.scoreCard.threeOfAKind.score : ''}</TableData>
                     </tr>
-                    <tr className="us-row four-of-a-kind">
-                        <td>4 OF A KIND</td>
-                        <td>Add Total of All Dice</td>
-                        <td>{props.scoreCard.fourOfAKind.completed ? props.scoreCard.twos.score : ''}</td>
+                    <tr className="ls-row four-of-a-kind">
+                        <TableData>4 OF A KIND</TableData>
+                        <TableData>Add Total of All Dice</TableData>
+                        <TableData>{props.scoreCard.fourOfAKind.completed || props.ended ? props.scoreCard.fourOfAKind.score : ''}</TableData>
                     </tr>
-                    <tr className="us-row full-house">
-                        <td>FULL HOUSE</td>
-                        <td>Score 25</td>
-                        <td>{props.scoreCard.fullHouse.completed ? props.scoreCard.fullHouse.score : ''}</td>
+                    <tr className="ls-row full-house">
+                        <TableData>FULL HOUSE</TableData>
+                        <TableData>Score 25</TableData>
+                        <TableData>{props.scoreCard.fullHouse.completed || props.ended ? props.scoreCard.fullHouse.score : ''}</TableData>
                     </tr>
-                    <tr className="us-row sm-straight">
-                        <td>SM STRAIGHT</td>
-                        <td>Score 30</td>
-                        <td>{props.scoreCard.smStraight.completed ? props.scoreCard.smStraight.score : ''}</td>
+                    <tr className="ls-row sm-straight">
+                        <TableData>SM STRAIGHT</TableData>
+                        <TableData>Score 30</TableData>
+                        <TableData>{props.scoreCard.smStraight.completed || props.ended ? props.scoreCard.smStraight.score : ''}</TableData>
                     </tr>
-                    <tr className="us-row lg-straight">
-                        <td>LG STRAIGHT</td>
-                        <td>Score 40</td>
-                        <td>{props.scoreCard.lgStraight.completed ? props.scoreCard.lgStraight.score : ''}</td>
+                    <tr className="ls-row lg-straight">
+                        <TableData>LG STRAIGHT</TableData>
+                        <TableData>Score 40</TableData>
+                        <TableData>{props.scoreCard.lgStraight.completed || props.ended ? props.scoreCard.lgStraight.score : ''}</TableData>
                     </tr>
-                    <tr className="us-row yahtzee">
-                        <td>YAHTZEE</td>
-                        <td>Score 50</td>
-                        <td>{props.scoreCard.yahtzee.completed ? props.scoreCard.yahtzee.score : ''}</td>
+                    <tr className="ls-row yahtzee">
+                        <TableData>YAHTZEE</TableData>
+                        <TableData>Score 50</TableData>
+                        <TableData>{props.scoreCard.yahtzee.completed || props.ended ? props.scoreCard.yahtzee.score : ''}</TableData>
                     </tr>
-                    <tr className="us-row chance">
-                        <td>CHANCE</td>
-                        <td>Add Total of All Dice</td>
-                        <td>{props.scoreCard.chance.completed ? props.scoreCard.chance.score : ''}</td>
+                    <tr className="ls-row chance">
+                        <TableData>CHANCE</TableData>
+                        <TableData>Add Total of All Dice</TableData>
+                        <TableData>{props.scoreCard.chance.completed || props.ended ? props.scoreCard.chance.score : ''}</TableData>
                     </tr>
-                    <tr className="us-row upper-total">
-                        <td>TOTAL</td>
-                        <td>of Upper Section</td>
-                        <td></td>
+                    <tr className="ls-row upper-total">
+                        <TableData>TOTAL</TableData>
+                        <TableData>of Upper Section</TableData>
+                        <TableData>{props.scoreCard.upperTotal.completed || props.ended ? props.scoreCard.upperTotal.score : ''}</TableData>
                     </tr>
-                    <tr className="us-row lower-total">
-                        <td>TOTAL</td>
-                        <td>of Lower Section</td>
-                        <td>{props.scoreCard.lowerScore.completed ? props.scoreCard.lowerScore.score : ''}</td>
+                    <tr className="ls-row lower-total">
+                        <TableData>TOTAL</TableData>
+                        <TableData>of Lower Section</TableData>
+                        <TableData>{props.scoreCard.lowerScore.completed || props.ended ? props.scoreCard.lowerScore.score : ''}</TableData>
                     </tr>
-                    <tr className="us-row grand-total">
-                        <td>GRAND TOTAL</td>
-                        <td></td>
-                        <td>{props.scoreCard.grandTotal.completed ? props.scoreCard.grandTotal.score : ''}</td>
+                    <tr className="ls-row grand-total">
+                        <TableData>GRAND TOTAL</TableData>
+                        <TableData></TableData>
+                        <TableData>{props.scoreCard.grandTotal.completed || props.ended ? props.scoreCard.grandTotal.score : ''}</TableData>
                     </tr>
                 </tbody>
             </table>
-        </div>
+        </ScoreCardSection>
     );
 }
 
 const mapStateToProps = (state) => {
     return {
         dice: state.game.dice,
-        scoreCard: state.score.scoreCard
+        scoreCard: state.score.scoreCard,
+        ended: state.game.ended
     }
 }
 
-export default connect(mapStateToProps, { scoreUpperSection, scoreLowerSection } )(ScoreCard);
+export default connect(mapStateToProps, null)(ScoreCard);

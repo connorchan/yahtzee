@@ -1,8 +1,24 @@
 import React from 'react';
 import Die from './Die';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
-
 import { rollDice } from '../actions';
+
+const DiceSection = styled.section`
+    background: #006400;
+    text-align: center;
+    padding-bottom: 15px;
+`;
+
+const DiceWrap = styled.div`
+    &.sticky {
+        position: fixed;
+        width: 100%;
+        background: #006400;
+        top: 0;
+        padding: 15px 0;
+    }
+`;
 
 class Dice extends React.Component {
     constructor(props) {
@@ -25,25 +41,26 @@ class Dice extends React.Component {
 
     render() {
         return (
-            <section className="dice-area">
-                <div className="dice-wrap">
+            <DiceSection>
+                <DiceWrap className="dice-wrap">
                     <Die id={0} ref={this.dieRef1} />
                     <Die id={1} ref={this.dieRef2} />
                     <Die id={2} ref={this.dieRef3} />
                     <Die id={3} ref={this.dieRef4} />
                     <Die id={4} ref={this.dieRef5} />
-                </div>
-                <div className="dice-controls">
-                    <button onClick={this.rollDice} disabled={this.props.numRolls > 2}>Roll</button>
-                </div>
-            </section>
+                    <div className="dice-controls">
+                        <button onClick={this.rollDice} disabled={this.props.numRolls > 2 || this.props.ended}>Roll</button>
+                    </div>
+                </DiceWrap>
+            </DiceSection>
         );
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        numRolls: state.game.numRolls
+        numRolls: state.game.numRolls,
+        ended: state.game.ended
     }
 }
 

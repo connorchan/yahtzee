@@ -138,7 +138,7 @@ const chance = (diceCounts) => {
     let score = 0;
     for (let i = 1; i < 7; i++) {
         if (diceCounts[i]) {
-            score += diceCounts[i];
+            score += (i * diceCounts[i]);
         }
     }
     return score;
@@ -204,7 +204,7 @@ const calculateTotals = (state) => {
                 completed: true,
                 score: grandTotal
             },
-        }, active: false
+        }
     }
 };
 
