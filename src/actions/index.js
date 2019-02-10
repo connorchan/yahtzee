@@ -1,4 +1,10 @@
-import { ROLL_DIE, CHANGE_DIE_STATUS, ROLL_DICE, RESET_TURN, SCORE_UPPER_SECTION, SCORE_LOWER_SECTION } from './types';
+import { ROLL_DIE, 
+        CHANGE_DIE_STATUS,
+        ROLL_DICE,
+        SCORE_UPPER_SECTION,
+        SCORE_LOWER_SECTION,
+        RESET_TURN,
+        END_GAME } from './types';
 
 export const rollDie = (id, value) => {
     return {
@@ -20,12 +26,6 @@ export const rollDice = () => {
     };
 };
 
-export const resetTurn = () => {
-    return {
-        type: RESET_TURN
-    };
-};
-
 export const scoreUpperSection = (dice, value, section) => {
     return {
         type: SCORE_UPPER_SECTION,
@@ -37,5 +37,18 @@ export const scoreLowerSection = (dice, section) => {
     return {
         type: SCORE_LOWER_SECTION,
         payload: { dice, section }
+    };
+};
+
+export const resetTurn = (dice) => {
+    return {
+        type: RESET_TURN,
+        payload: { dice }
+    };
+};
+
+export const endGame = () => {
+    return {
+        type: END_GAME
     };
 };

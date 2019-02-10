@@ -120,7 +120,7 @@ class Die extends React.Component {
                 <div className="die-controls">
                     <button className={`die-status ${this.props.status}`}
                             onClick={this.toggleStatus}
-                            disabled={this.props.numRolls === 0}>{this.statusMessages[this.props.status]}
+                            disabled={this.props.numRolls === 0 || !this.props.active}>{this.statusMessages[this.props.status]}
                     </button>
                 </div>
             </DieWrap>
@@ -132,7 +132,8 @@ const mapStateToProps = (state, ownProps) => {
     return {
         value: state.game.dice[ownProps.id].value,
         status: state.game.dice[ownProps.id].status,
-        numRolls: state.game.numRolls
+        numRolls: state.game.numRolls,
+        active: state.game.active
     }
 }
 

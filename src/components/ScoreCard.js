@@ -45,17 +45,17 @@ const ScoreCard = (props) => {
                     <tr className="us-row upper-total-score">
                         <td>TOTAL SCORE</td>
                         <td></td>
-                        <td></td>
+                        <td>{props.scoreCard.upperScore.completed ? props.scoreCard.upperScore.score : ''}</td>
                     </tr>
                     <tr className="us-row bonus">
                         <td>BONUS</td>
                         <td>35pts if Total Score <br/> >= 63</td>
-                        <td></td>
+                        <td>{props.scoreCard.upperBonus.completed ? props.scoreCard.upperBonus.score : ''}</td>
                     </tr>
                     <tr className="us-row upper-total">
                         <td>TOTAL</td>
                         <td>Of Upper Section</td>
-                        <td></td>
+                        <td>{props.scoreCard.upperTotal.completed ? props.scoreCard.upperTotal.score : ''}</td>
                     </tr>
                     <tr className="header-row">
                         <td>LOWER SECTION</td>
@@ -105,12 +105,12 @@ const ScoreCard = (props) => {
                     <tr className="us-row lower-total">
                         <td>TOTAL</td>
                         <td>of Lower Section</td>
-                        <td></td>
+                        <td>{props.scoreCard.lowerScore.completed ? props.scoreCard.lowerScore.score : ''}</td>
                     </tr>
                     <tr className="us-row grand-total">
                         <td>GRAND TOTAL</td>
                         <td></td>
-                        <td></td>
+                        <td>{props.scoreCard.grandTotal.completed ? props.scoreCard.grandTotal.score : ''}</td>
                     </tr>
                 </tbody>
             </table>
@@ -121,7 +121,7 @@ const ScoreCard = (props) => {
 const mapStateToProps = (state) => {
     return {
         dice: state.game.dice,
-        scoreCard: state.game.scoreCard
+        scoreCard: state.score.scoreCard
     }
 }
 
