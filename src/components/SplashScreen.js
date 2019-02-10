@@ -1,4 +1,5 @@
 import React from 'react';
+import CrookedDie from './CrookedDie';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -40,23 +41,7 @@ const SplashScreen = () => {
     return (
         <React.Fragment>
             <SplashSection>
-                <SplashDie>
-                    <SplashDotRow>
-                        <SplashDieDot />
-                        <SplashDieDot />
-                        <SplashDieDot />
-                    </SplashDotRow>
-                    <SplashDotRow>
-                        <SplashDieDot />
-                        <SplashDieDot />
-                        <SplashDieDot />
-                    </SplashDotRow>
-                    <SplashDotRow>
-                        <SplashDieDot />
-                        <SplashDieDot />
-                        <SplashDieDot />
-                    </SplashDotRow>
-                </SplashDie>
+                <CrookedDie/>
             </SplashSection>
             <SplashSection>
                 <div className="user-options">
