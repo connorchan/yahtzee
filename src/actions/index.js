@@ -3,6 +3,7 @@ import { ROLL_DIE,
         ROLL_DICE,
         SCORE_UPPER_SECTION,
         SCORE_LOWER_SECTION,
+        RESET_GAME,
         RESET_TURN,
         END_GAME } from './types';
 
@@ -44,6 +45,12 @@ export const resetTurn = (dice) => {
     return {
         type: RESET_TURN,
         payload: { dice }
+    };
+};
+
+export const resetGame = () => {
+    return {
+        type: RESET_GAME
     };
 };
 

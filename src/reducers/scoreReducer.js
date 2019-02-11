@@ -1,6 +1,7 @@
 /* eslint no-useless-computed-key: "off" */
 import { SCORE_UPPER_SECTION,
     SCORE_LOWER_SECTION,
+    RESET_GAME,
     END_GAME } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -213,6 +214,8 @@ export default (state = INITIAL_STATE, action) => {
             return updateScoreCard(state, action.payload.section, scoreUpperSection(action.payload.value, action.payload.dice));
         case SCORE_LOWER_SECTION:
             return updateScoreCard(state, action.payload.section, scoreLowerSection(getDiceCount(action.payload.dice), action.payload.section));
+        case RESET_GAME:
+            return { ...state, scoreCard: INITIAL_STATE.scoreCard };
         case END_GAME:
             return calculateTotals(state);
         default:

@@ -4,7 +4,7 @@ import ScoreCard from './ScoreCard';
 import ScoreCardControls from './ScoreCardControls';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { endGame } from '../actions';
+import { endGame, resetGame } from '../actions';
 
 const EndMessageWrap = styled.div`
     background: #EEE;
@@ -44,7 +44,8 @@ class Game extends React.Component {
     }
 
     componentWillUnmount() {
-        window.removeEventListener('scroll', this.handleScroll)
+        window.removeEventListener('scroll', this.handleScroll);
+        this.props.resetGame();
     }
 
     handleScroll() {
@@ -86,4 +87,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { endGame })(Game);
+export default connect(mapStateToProps, { endGame, resetGame })(Game);

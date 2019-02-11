@@ -3,6 +3,7 @@ import { ROLL_DIE,
         CHANGE_DIE_STATUS,
         ROLL_DICE,
         RESET_TURN,
+        RESET_GAME,
         END_GAME } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -56,6 +57,8 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, dice: updateDie(state.dice, action, 'status') };
         case ROLL_DICE:
             return { ...state, numRolls: state.numRolls <  3 ? state.numRolls += 1 : 0 };
+        case RESET_GAME:
+            return { ...state, active: INITIAL_STATE.active, ended: INITIAL_STATE.ended, numRolls: INITIAL_STATE.numRolls, dice: INITIAL_STATE.dice }
         case RESET_TURN:
             return { ...state, numRolls: 0, dice: resetDice(state.dice) };
         case END_GAME:
