@@ -4,7 +4,7 @@ It's Yahtzee! The favorite game of someone, somewhere in the world.
 
 In the project directory, you can run:
 
-### `npm start`
+### `npm install`
 
 ### `npm start`
 
