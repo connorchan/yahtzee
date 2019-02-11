@@ -49,7 +49,7 @@ class Dice extends React.Component {
                     <Die id={3} ref={this.dieRef4} />
                     <Die id={4} ref={this.dieRef5} />
                     <div className="dice-controls">
-                        <button onClick={this.rollDice} disabled={this.props.numRolls > 2 || this.props.ended}>Roll</button>
+                        <button className="ui button red" onClick={this.rollDice} disabled={this.props.numRolls > 2 || this.props.ended}>Roll</button>
                     </div>
                 </DiceWrap>
             </DiceSection>

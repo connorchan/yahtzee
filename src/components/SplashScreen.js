@@ -16,8 +16,8 @@ const SplashScreen = () => {
             </SplashSection>
             <SplashSection>
                 <div className="user-options">
-                    <Link to={'/game'}><button type="button">PLAY</button></Link>
-                    <Link to={'/rules'}><button type="button">RULES</button></Link>
+                    <Link to={'/game'}><button type="button" className="ui inverted secondary button">PLAY</button></Link>
+                    <Link to={'/rules'}><button type="button" className="ui inverted secondary button">RULES</button></Link>
                 </div>
             </SplashSection>
         </React.Fragment>

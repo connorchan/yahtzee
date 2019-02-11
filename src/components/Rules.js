@@ -8,6 +8,7 @@ const RulesSection = styled.section`
 `;
 
 const RulesList = styled.ol`
+    padding-top: 15px;
     padding-right: 40px;
 `;
 
@@ -41,6 +42,7 @@ const Rules = () => {
                 <RulesListItem>To end the game and calculate your final score, click the
                     &quot;End Game&quot; button.
                 </RulesListItem>
+                <RulesListItem>For more information about scoring, <a href="http://grail.sourceforge.net/demo/yahtzee/rules.html" target="_blank" rel="noopener noreferrer">click here.</a></RulesListItem>
             </RulesList>
             <Link to={'/'}><HomeLinktext>Go Back</HomeLinktext></Link>
         </RulesSection>
