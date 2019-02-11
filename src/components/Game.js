@@ -4,6 +4,7 @@ import ScoreCard from './ScoreCard';
 import ScoreCardControls from './ScoreCardControls';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { endGame } from '../actions';
 
 const EndMessageWrap = styled.div`
     background: #EEE;
@@ -17,11 +18,29 @@ const Bold = styled.span`
 
 const Message= styled.p`
     padding: 0 0 10px 0;
+
+    :nth-child(1) {
+        margin: 0 !important;
+    }
 `;
 
 class Game extends React.Component {
     componentDidMount() {
         window.addEventListener('scroll', this.handleScroll, { passive: true });
+    }
+
+    componentDidUpdate() {
+        if (!this.props.ended) {
+            let sections = ['aces', 'twos', 'threes', 'fours', 'fives', 'sixes',
+            'threeOfAKind', 'fourOfAKind', 'smStraight', 'lgStraight', 'yahtzee', 'chance'];
+            let completed = sections.filter((section) => {
+                return this.props.scoreCard[section].completed;
+            }).length;
+
+            if (completed === sections.length) {
+                this.props.endGame();
+            }
+        }
     }
 
     componentWillUnmount() {
@@ -67,4 +86,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, null)(Game);
+export default connect(mapStateToProps, { endGame })(Game);

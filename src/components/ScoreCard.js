@@ -120,6 +120,11 @@ const ScoreCard = (props) => {
                         <TableData>Add Total of All Dice</TableData>
                         <TableData>{props.scoreCard.chance.completed || props.ended ? props.scoreCard.chance.score : ''}</TableData>
                     </tr>
+                    <tr className="header-row">
+                        <TableData>FINAL</TableData>
+                        <TableData></TableData>
+                        <TableData></TableData>
+                    </tr>
                     <tr className="ls-row upper-total">
                         <TableData>TOTAL</TableData>
                         <TableData>of Upper Section</TableData>

@@ -128,10 +128,9 @@ const yahtzee = (diceCounts) => {
     for (let i = 1; i < 7; i++) {
         if (diceCounts[i] && diceCounts[i] === 5) {
             return 50;
-        } else {
-            return 0;
         }
     }
+    return 0;
 };
 
 const chance = (diceCounts) => {
