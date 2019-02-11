@@ -16,7 +16,7 @@ const DiceWrap = styled.div`
         width: 100%;
         background: #006400;
         top: 0;
-        padding: 15px 0;
+        padding: 5px 0;
     }
 `;
 

@@ -15,7 +15,7 @@ const DieBox = styled.div`
     border: 1px solid #000;
     border-radius: 10px;
     position: relative;
-    margin-bottom: 10px;
+    margin: 0 auto 10px auto;
     padding-bottom: 15px;
 
     &.die-1 > div:nth-child(1) > div:nth-child(1),
@@ -73,6 +73,11 @@ const DieDot = styled.div`
     background: #000;
 `;
 
+const ToggleButton = styled.button`
+    width: 95px;
+    margin-right: 0 !important;
+`;
+
 class Die extends React.Component {
     statusMessages = {
         active: 'Active',
@@ -116,10 +121,10 @@ class Die extends React.Component {
                     </DotRow>
                 </DieBox>
                 <div className="die-controls">
-                    <button className={`die-status ${this.props.status}`}
+                    <ToggleButton className={`die-status btn-${this.props.status} ui standard button`}
                             onClick={this.toggleStatus}
-                            disabled={this.props.numRolls === 0 || !this.props.active}>{this.statusMessages[this.props.status]}
-                    </button>
+                            disabled={this.props.numRolls === 0 || !this.props.active || this.props.numRolls === 3}>{this.statusMessages[this.props.status]}
+                    </ToggleButton>
                 </div>
             </DieWrap>
         );
