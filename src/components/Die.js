@@ -116,7 +116,7 @@ class Die extends React.Component {
                     </DotRow>
                 </DieBox>
                 <div className="die-controls">
-                    <button className={`die-status ${this.props.status} ui inverted button`}
+                    <button className={`die-status ${this.props.status}`}
                             onClick={this.toggleStatus}
                             disabled={this.props.numRolls === 0 || !this.props.active}>{this.statusMessages[this.props.status]}
                     </button>
