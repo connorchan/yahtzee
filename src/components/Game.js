@@ -51,8 +51,10 @@ class Game extends React.Component {
     handleScroll() {
         if (window.scrollY > 40) {
             document.querySelector('.dice-wrap').classList.add("sticky");
+            document.querySelector('.scorecard-section').classList.add("sticky");
         } else {
             document.querySelector('.dice-wrap').classList.remove("sticky");
+            document.querySelector('.scorecard-section').classList.remove("sticky");
         }
     }
 

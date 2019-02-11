@@ -5,6 +5,10 @@ import { connect } from 'react-redux';
 const ScoreCardSection = styled.section`
     background: #EEE;
     padding: 15px 0;
+
+    &.sticky {
+        padding-top: 220px;
+    }
 `;
 
 const TableData = styled.td`
@@ -27,7 +31,7 @@ const TableData = styled.td`
 
 const ScoreCard = (props) => {
     return (
-        <ScoreCardSection>
+        <ScoreCardSection className="scorecard-section">
             <table className="scorecard" align="center" cellPadding="0">
                 <tbody>
                     <tr className="header-row">

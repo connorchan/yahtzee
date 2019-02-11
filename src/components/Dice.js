@@ -7,16 +7,16 @@ import { rollDice } from '../actions';
 const DiceSection = styled.section`
     background: #006400;
     text-align: center;
-    padding-bottom: 15px;
 `;
 
 const DiceWrap = styled.div`
+    padding-bottom: 15px;
+    
     &.sticky {
         position: fixed;
         width: 100%;
         background: #006400;
         top: 0;
-        padding: 5px 0 15px;
     }
 `;
 
