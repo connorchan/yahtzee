@@ -17,7 +17,7 @@ const RulesListItem = styled.li`
     margin: 20px 0;
 `;
 
-const HomeLinktext = styled.p`
+const HomeLinktext = styled.span`
     padding-left: 40px;
 `;
 
