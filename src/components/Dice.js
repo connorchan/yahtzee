@@ -20,6 +20,11 @@ const DiceWrap = styled.div`
     }
 `;
 
+const RemainingRolls = styled.div`
+    margin-top: 10px;
+    color: #FFF;
+`;
+
 class Dice extends React.Component {
     constructor(props) {
         super(props);
@@ -50,6 +55,7 @@ class Dice extends React.Component {
                     <Die id={4} ref={this.dieRef5} />
                     <div className="dice-controls">
                         <button className="ui button red" onClick={this.rollDice} disabled={this.props.numRolls > 2 || this.props.ended}>Roll</button>
+                        <RemainingRolls>Remaining rolls: {3 - this.props.numRolls}</RemainingRolls>
                     </div>
                 </DiceWrap>
             </DiceSection>
