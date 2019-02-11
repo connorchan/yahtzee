@@ -34,7 +34,7 @@ const Rules = () => {
                 </RulesListItem>
                 <RulesListItem>At any point during a turn, or after three rolls, you will click
                     one of the buttons beneath the score card to score points for a
-                    section of the scorecard.
+                    section of the score card.
                 </RulesListItem>
                 <RulesListItem>If you click to score a section but your dice don't qualify, you
                     will receive 0 points for that section.
