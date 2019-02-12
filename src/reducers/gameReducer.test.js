@@ -40,91 +40,33 @@ describe('game reducer', () => {
     });
 
     it('should handle ROLL_DIE', () => {
-        expect(
-            reducer(INITIAL_STATE, {
-                type: types.ROLL_DIE,
-                payload: {
-                    id: 1,
-                    value: 2
-                }
-            })
-        ).toEqual({
-            active: true,
-            ended,
-            numRolls,
-            dice: [
-                {
-                    value: 1,
-                    status: 'active'
-                },
-                {
-                    value: 2,
-                    status: 'active'
-                },
-                {
-                    value: 1,
-                    status: 'active'
-                },
-                {
-                    value: 1,
-                    status: 'active'
-                },
-                {
-                    value: 1,
-                    status: 'active'
-                }
-            ]
+        let reduced = reducer(INITIAL_STATE, {
+            type: types.ROLL_DIE,
+            payload: {
+                id: 1,
+                value: 2
+            }
         });
+
+        expect(reduced.active).toBe(true) && expect(reduced.dice[1].value).toBe(2);
     });
 
     it('should handle CHANGE_DIE_STATUS', () => {
-        expect(
-            reducer(INITIAL_STATE, {
-                type: types.CHANGE_DIE_STATUS,
-                payload: {
-                    id: 1,
-                    status: 'holding'
-                }
-            })
-        ).toEqual({
-            active,
-            ended,
-            numRolls,
-            dice: [
-                {
-                    value: 1,
-                    status: 'active'
-                },
-                {
-                    value: 1,
-                    status: 'holding'
-                },
-                {
-                    value: 1,
-                    status: 'active'
-                },
-                {
-                    value: 1,
-                    status: 'active'
-                },
-                {
-                    value: 1,
-                    status: 'active'
-                }
-            ]
+        let reduced = reducer(INITIAL_STATE, {
+            type: types.CHANGE_DIE_STATUS,
+            payload: {
+                id: 1,
+                status: 'holding'
+            }
         });
+
+        expect(reduced.dice[1].status).toBe('holding');
     });
 
     it('should handle ROLL_DICE', () => {
-        expect(
-            reducer(INITIAL_STATE, {
-                type: types.ROLL_DICE
-            })
-        ).toEqual({
-            active,
-            ended,
-            numRolls: 1,
-            dice
+        let reduced = reducer(INITIAL_STATE, {
+            type: types.ROLL_DICE
         });
+        expect(reduced.numRolls).toBe(1);
     });
 });
