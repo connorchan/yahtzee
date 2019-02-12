@@ -32,7 +32,7 @@ class Game extends React.Component {
     componentDidUpdate() {
         if (!this.props.ended) {
             let sections = ['aces', 'twos', 'threes', 'fours', 'fives', 'sixes',
-            'threeOfAKind', 'fourOfAKind', 'smStraight', 'lgStraight', 'yahtzee', 'chance'];
+            'threeOfAKind', 'fourOfAKind', 'fullHouse', 'smStraight', 'lgStraight', 'yahtzee', 'chance'];
             let completed = sections.filter((section) => {
                 return this.props.scoreCard[section].completed;
             }).length;
