@@ -2,6 +2,7 @@ import React from 'react';
 import Dice from './Dice';
 import ScoreCard from './ScoreCard';
 import ScoreCardControls from './ScoreCardControls';
+import { Prompt } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { endGame, resetGame } from '../actions';
@@ -73,6 +74,7 @@ class Game extends React.Component {
     render() {
         return (
             <React.Fragment>
+                <Prompt when={this.props.active && !this.props.ended} message="Are you sure you want to leave? You will lose your current game progress." />
                 <Dice />
                 <ScoreCard />
                 {this.renderFinalScoreMessage()}
@@ -84,6 +86,7 @@ class Game extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
+        active: state.game.active,
         scoreCard: state.score.scoreCard,
         ended: state.game.ended
     }
