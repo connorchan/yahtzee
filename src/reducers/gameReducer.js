@@ -52,11 +52,11 @@ const updateDie = (dice, action, property) => {
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case ROLL_DIE:
-            return { ...state, active: true, dice: updateDie(state.dice, action, 'value') };
+            return { ...state, dice: updateDie(state.dice, action, 'value') };
         case CHANGE_DIE_STATUS:
             return { ...state, dice: updateDie(state.dice, action, 'status') };
         case ROLL_DICE:
-            return { ...state, numRolls: state.numRolls <  3 ? state.numRolls += 1 : 0 };
+            return { ...state, active: true, numRolls: state.numRolls <  3 ? state.numRolls += 1 : 0 };
         case RESET_GAME:
             return { ...state, active: INITIAL_STATE.active, ended: INITIAL_STATE.ended, numRolls: INITIAL_STATE.numRolls, dice: INITIAL_STATE.dice }
         case RESET_TURN:
