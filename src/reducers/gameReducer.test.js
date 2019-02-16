@@ -40,7 +40,7 @@ describe('game reducer', () => {
     });
 
     it('should handle ROLL_DIE', () => {
-        let reduced = reducer(INITIAL_STATE, {
+        const reduced = reducer(INITIAL_STATE, {
             type: types.ROLL_DIE,
             payload: {
                 id: 1,
@@ -52,7 +52,7 @@ describe('game reducer', () => {
     });
 
     it('should handle CHANGE_DIE_STATUS', () => {
-        let reduced = reducer(INITIAL_STATE, {
+        const reduced = reducer(INITIAL_STATE, {
             type: types.CHANGE_DIE_STATUS,
             payload: {
                 id: 1,
@@ -64,7 +64,7 @@ describe('game reducer', () => {
     });
 
     it('should handle ROLL_DICE', () => {
-        let reduced = reducer(INITIAL_STATE, {
+        const reduced = reducer(INITIAL_STATE, {
             type: types.ROLL_DICE
         });
         expect(reduced.numRolls).toBe(1);
