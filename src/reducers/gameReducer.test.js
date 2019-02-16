@@ -48,7 +48,7 @@ describe('game reducer', () => {
             }
         });
 
-        expect(reduced.active).toBe(true) && expect(reduced.dice[1].value).toBe(2);
+        expect(reduced.ended).toBe(false) && expect(reduced.dice[1].value).toBe(2);
     });
 
     it('should handle CHANGE_DIE_STATUS', () => {
