@@ -113,7 +113,7 @@ const ScoreCardControls = (props) => {
                 <ScoreCardButton
                     className="ui red button"
                     onClick={() => {props.endGame()}}
-                    disabled={props.ended}>End Game</ScoreCardButton>
+                    disabled={!props.active || props.ended}>End Game</ScoreCardButton>
             </div>
         </ScoreCardControlsSection>
     );
