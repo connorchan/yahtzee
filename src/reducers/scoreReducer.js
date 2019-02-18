@@ -174,7 +174,7 @@ const calculateTotals = (state) => {
                     state.scoreCard.lgStraight.score +
                     state.scoreCard.yahtzee.score +
                     state.scoreCard.chance.score;
-    const grandTotal = upperScore + upperBonus + lowerScore;
+    const grandTotal = upperTotal + lowerScore;
 
     return {
         ...state, scoreCard: {
