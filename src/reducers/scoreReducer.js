@@ -28,7 +28,7 @@ const INITIAL_STATE = {
 };
 
 const getDiceCount = (dice) => {
-    let counts = {};
+    const counts = {};
     for (let i = 0; i < dice.length; i++) {
         if (counts.hasOwnProperty(dice[i].value)) {
             counts[dice[i].value] += 1;
@@ -40,7 +40,7 @@ const getDiceCount = (dice) => {
 };
 
 const scoreUpperSection = (value, dice) => {
-    let numDice = dice.filter((die) => {
+    const numDice = dice.filter((die) => {
         return die.value === value;
     }).length;
 
@@ -69,8 +69,8 @@ const scoreLowerSection = (diceCounts, section) => {
 };
 
 const ofAKind = (diceCounts, whichOfAKind) => {
-    var score = 0;
-    var isValid = false;
+    let score = 0;
+    let isValid = false;
     for (let i = 1; i < 7; i++) {
         if (diceCounts[i]) {
             if (diceCounts[i] >= whichOfAKind) {
@@ -103,9 +103,9 @@ const fullHouse = (diceCounts) => {
 };
 
 const smallStraight = (diceCounts) => {
-    var ssOne = (diceCounts[1] && diceCounts[2] && diceCounts[3] && diceCounts[4]);
-    var ssTwo = (diceCounts[2] && diceCounts[3] && diceCounts[4] && diceCounts[5]);
-    var ssThree = (diceCounts[3] && diceCounts[4] && diceCounts[5] && diceCounts[6]);
+    const ssOne = (diceCounts[1] && diceCounts[2] && diceCounts[3] && diceCounts[4]);
+    const ssTwo = (diceCounts[2] && diceCounts[3] && diceCounts[4] && diceCounts[5]);
+    const ssThree = (diceCounts[3] && diceCounts[4] && diceCounts[5] && diceCounts[6]);
 
     if (ssOne || ssTwo || ssThree) {
         return 30;
@@ -115,8 +115,8 @@ const smallStraight = (diceCounts) => {
 };
 
 const largeStraight = (diceCounts) => {
-    var lsOne = (diceCounts[1] && diceCounts[2] && diceCounts[3] && diceCounts[4] && diceCounts[5]);
-    var lsTwo = (diceCounts[2] && diceCounts[3] && diceCounts[4] && diceCounts[5] && diceCounts[6]);
+    const lsOne = (diceCounts[1] && diceCounts[2] && diceCounts[3] && diceCounts[4] && diceCounts[5]);
+    const lsTwo = (diceCounts[2] && diceCounts[3] && diceCounts[4] && diceCounts[5] && diceCounts[6]);
 
     if (lsOne || lsTwo) {
         return 40;
@@ -159,22 +159,22 @@ const updateScoreCard = (state, section, score) => {
 };
 
 const calculateTotals = (state) => {
-    let upperScore = state.scoreCard.aces.score +
+    const upperScore = state.scoreCard.aces.score +
                     state.scoreCard.twos.score +
                     state.scoreCard.threes.score +
                     state.scoreCard.fours.score +
                     state.scoreCard.fives.score +
                     state.scoreCard.sixes.score;
-    let upperBonus = upperScore >= 63 ? 35 : 0;
-    let upperTotal = upperScore + upperBonus;
-    let lowerScore = state.scoreCard.threeOfAKind.score +
+    const upperBonus = upperScore >= 63 ? 35 : 0;
+    const upperTotal = upperScore + upperBonus;
+    const lowerScore = state.scoreCard.threeOfAKind.score +
                     state.scoreCard.fourOfAKind.score +
                     state.scoreCard.fullHouse.score +
                     state.scoreCard.smStraight.score +
                     state.scoreCard.lgStraight.score +
                     state.scoreCard.yahtzee.score +
                     state.scoreCard.chance.score;
-    let grandTotal = upperScore + upperBonus + lowerScore;
+    const grandTotal = upperScore + upperBonus + lowerScore;
 
     return {
         ...state, scoreCard: {
