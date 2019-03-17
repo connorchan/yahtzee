@@ -66,6 +66,7 @@ class Game extends React.Component {
                 <EndMessageWrap>
                     <Message>Your final score is: <Bold>{this.props.scoreCard.grandTotal.score} points.</Bold></Message>
                     <Message>{message}</Message>
+                    <button onClick={this.props.resetGame} className="ui button primary" style={{marginBottom: "15px"}}>Reset Game</button>
                 </EndMessageWrap>
             );
         }
